@@ -37,7 +37,7 @@ public class Counter extends Actor
     }
     public void gameOver()
     {
-        if(value == target)
+        if(value <= target)
         {
             ((Space)getWorld()).endGame();      
         }

@@ -10,7 +10,7 @@ public class Bullet extends SmoothMover
     private int life = 30;
     
     private static final int pointsToAdd = 100;
-    private static final int pointsToSubtract = 300;
+    private static final int pointsToSubtract = -300;
     /**
      * Default constructor for testing.
      */
@@ -41,6 +41,7 @@ public class Bullet extends SmoothMover
             move();
             checkAsteroidHit();
             checkHazardHit();
+            //removal();
         }
     }    
     /**
@@ -53,7 +54,7 @@ public class Bullet extends SmoothMover
         {
             ((Space)getWorld()).updateScore(pointsToAdd);
             removeTouching(Asteroid.class);
-            getWorld().removeObject(this);
+            life = 0;
         }
     } 
     private void checkHazardHit()
@@ -63,7 +64,14 @@ public class Bullet extends SmoothMover
         {
             ((Space)getWorld()).updateScore(pointsToSubtract);
             removeTouching(Hazard.class);
-            getWorld().removeObject(this);
+            life = 0;
         }
     } 
+    private void removal()
+    {
+        if (isTouching(Hazard.class) || (isTouching(Asteroid.class)))
+        {
+            getWorld().removeObject(this);
+        }
+    }
 }
