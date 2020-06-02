@@ -1,26 +1,23 @@
 import greenfoot.*;
 
 /**
- * A bullet that can hit asteroids.
- * 
- * @author Poul Henriksen
- * @author Michael Kölling
+ * A bullet that can hit asteroids and (hopefully not) hazards. 
+ * @author Will Threlkeld
+ * @version 6/1/2020
  */
 public class Bullet extends SmoothMover
 {
-    /** The damage this bullet will deal */
-    private static final int damage = 16;
-    
-    /** A bullet looses one life each act, and will disappear when life = 0 */
     private int life = 30;
-    private static final int pointsToAdd = 1;
+    
+    private static final int pointsToAdd = 100;
+    private static final int pointsToSubtract = 300;
     /**
      * Default constructor for testing.
      */
     public Bullet()
     {
-    }
-    
+        
+    }  
     /**
      * Create a bullet with given speed and direction of movement.
      */
@@ -30,8 +27,7 @@ public class Bullet extends SmoothMover
         setRotation(rotation);
         addToVelocity(new Vector(rotation, 15));
         Greenfoot.playSound("EnergyGun.wav");
-    }
-    
+    }    
     /**
      * The bullet will damage asteroids if it hits them.
      */
@@ -43,20 +39,31 @@ public class Bullet extends SmoothMover
         else {
             life--;
             move();
-            //checkAsteroidHit();
+            checkAsteroidHit();
+            checkHazardHit();
         }
-    }
-    
+    }    
     /**
      * Check whether we have hit an asteroid.
      */
-    /* private void checkAsteroidHit()
+    private void checkAsteroidHit()
     {
         Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
-        if (asteroid != null)
+        if (isTouching(Asteroid.class))
         {
+            ((Space)getWorld()).updateScore(pointsToAdd);
+            removeTouching(Asteroid.class);
             getWorld().removeObject(this);
-            asteroid.hit(damage);
         }
-    } */
+    } 
+    private void checkHazardHit()
+    {
+        Hazard hazard = (Hazard) getOneIntersectingObject(Hazard.class);
+        if (isTouching(Hazard.class))
+        {
+            ((Space)getWorld()).updateScore(pointsToSubtract);
+            removeTouching(Hazard.class);
+            getWorld().removeObject(this);
+        }
+    } 
 }

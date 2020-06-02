@@ -1,14 +1,11 @@
 import greenfoot.*;
 
 /**
- * A Counter class that allows you to display a numerical value on screen.
+ * Keeps track of your score.
  * 
- * The Counter is an actor, so you will need to create it, and then add it to
- * the world in Greenfoot.  If you keep a reference to the Counter then you
- * can adjust its value.
  * 
- * @author Neil Brown and Michael Kölling 
- * @version 1.1
+ * @author Will Threlkeld 
+ * @version 6/1/2020
  */
 public class Counter extends Actor
 {
@@ -16,80 +13,54 @@ public class Counter extends Actor
     private GreenfootImage background;
     private int value;
     private int target;
-    private String prefix;
-    
+    private String prefix;  
     public Counter()
     {
         this(new String());
     }
-
-    /**
-     * Create a new counter, initialised to 0.
-     */
     public Counter(String prefix)
     {
-        background = getImage();  // get image from class
-        value = 0;
+        background = getImage();
+        value = 1000;
         target = 0;
         this.prefix = prefix;
         updateImage();
     }
-    
-    /**
-     * Animate the display to count up (or down) to the current target value.
-     */
     public void act() 
     {
-        if (value < target) {
-            value++;
-            updateImage();
-        }
-        else if (value > target) {
+        if (value > target) 
+        {
             value--;
             updateImage();
         }
+        gameOver();
     }
-
-    /**
-     * Add a new score to the current counter value.  This will animate
-     * the counter over consecutive frames until it reaches the new value.
-     */
+    public void gameOver()
+    {
+        if(value == target)
+        {
+            ((Space)getWorld()).endGame();      
+        }
+    }
     public void add(int score)
     {
-        target += score;
+        value += score;
     }
-
-    /**
-     * Return the current counter value.
-     */
     public int getValue()
     {
         return target;
     }
-
-    /**
-     * Set a new counter value.  This will not animate the counter.
-     */
     public void setValue(int newValue)
     {
         target = newValue;
         value = newValue;
         updateImage();
     }
-    
-    /**
-     * Sets a text prefix that should be displayed before
-     * the counter value (e.g. "Score: ").
-     */
     public void setPrefix(String prefix)
     {
         this.prefix = prefix;
         updateImage();
     }
-
-    /**
-     * Update the image on screen to show the current value.
-     */
     private void updateImage()
     {
         GreenfootImage image = new GreenfootImage(background);

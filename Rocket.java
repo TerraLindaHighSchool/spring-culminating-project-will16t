@@ -1,22 +1,17 @@
 import greenfoot.*;
 
 /***
- * A rocket that can be controlled by the arrowkeys: up, left, right.
- * The gun is fired by hitting the 'space' key. 'z' releases a proton wave.
+ * A simple rocket than can move left with the left arrow key, right
+ * with the right arrow key, and can shoot bullets with spacebar
  * 
- * @author Poul Henriksen
- * @author Michael Kölling
- * 
- * @version 1.1
+ * @author Will Threlkeld
+ * @version 6/1/2020
  */
 public class Rocket extends SmoothMover
 {
-    private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
-    
-    private int reloadDelayCount;               // How long ago we fired the gun the last time.
-    
-    private GreenfootImage rocket = new GreenfootImage("rocket.png");    
-    
+    private static final int gunReloadTime = 5;             
+    private int reloadDelayCount;                  
+    private GreenfootImage rocket = new GreenfootImage("rocket.png");     
     /**
      * Initialise this rocket.
      */
@@ -34,7 +29,6 @@ public class Rocket extends SmoothMover
         checkKeys();
         reloadDelayCount++;
         move();
-        //checkCollision();
         setRotation(-90);
     }
     /**
@@ -48,7 +42,7 @@ public class Rocket extends SmoothMover
         }
         if (Greenfoot.isKeyDown("Left"))
         {
-            setLocation(getX()-4, getY());
+            setLocation(getX()-5, getY());
         }
         if (Greenfoot.isKeyDown("Right"))
         {
@@ -69,13 +63,4 @@ public class Rocket extends SmoothMover
             reloadDelayCount = -15;
         }
     }
-    /* private void checkCollision()
-    {
-          if( getOneIntersectingObject(Asteroid.class) != null)
-          {
-              Space space = (Space) getWorld();
-              space.addObject(new Explosion(),getX(),getY());
-              space.removeObject(this);
-          }
-    } */
 }
