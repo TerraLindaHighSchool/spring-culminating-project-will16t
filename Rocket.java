@@ -36,15 +36,15 @@ public class Rocket extends SmoothMover
      */
     private void checkKeys() 
     {
-        if (Greenfoot.isKeyDown("space")) 
+        if (Greenfoot.isKeyDown("space") || Greenfoot.isKeyDown("w")) 
         {
             fire();
         }
-        if (Greenfoot.isKeyDown("Left"))
+        if (Greenfoot.isKeyDown("Left") || Greenfoot.isKeyDown("a"))
         {
             setLocation(getX()-5, getY());
         }
-        if (Greenfoot.isKeyDown("Right"))
+        if (Greenfoot.isKeyDown("Right") || Greenfoot.isKeyDown("d"))
         {
             setLocation(getX()+5, getY());
         }
