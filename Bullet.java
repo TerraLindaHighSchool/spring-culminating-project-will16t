@@ -25,8 +25,7 @@ public class Bullet extends SmoothMover
     {
         super(speed);
         setRotation(rotation);
-        addToVelocity(new Vector(rotation, 15));
-        Greenfoot.playSound("EnergyGun.wav");
+        addToVelocity(new Vector(rotation, 15));        
     }    
     /**
      * The bullet will damage asteroids if it hits them.
@@ -40,8 +39,7 @@ public class Bullet extends SmoothMover
             life--;
             move();
             checkAsteroidHit();
-            checkHazardHit();
-            //removal();
+            checkHazardHit();            
         }
     }    
     /**
@@ -53,6 +51,7 @@ public class Bullet extends SmoothMover
         if (isTouching(Asteroid.class))
         {
             ((Space)getWorld()).updateScore(pointsToAdd);
+            Greenfoot.playSound("Boop.wav");
             removeTouching(Asteroid.class);
             life = 0;
         }
@@ -63,15 +62,9 @@ public class Bullet extends SmoothMover
         if (isTouching(Hazard.class))
         {
             ((Space)getWorld()).updateScore(pointsToSubtract);
+            Greenfoot.playSound("Error.wav");
             removeTouching(Hazard.class);
             life = 0;
         }
     } 
-    private void removal()
-    {
-        if (isTouching(Hazard.class) || (isTouching(Asteroid.class)))
-        {
-            getWorld().removeObject(this);
-        }
-    }
 }

@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Will Threlkeld 
  * @version 6/1/2020
  */
-public class Asteroid extends Actor
+public class Asteroid extends Obstacles
 {
     int dx = Greenfoot.getRandomNumber(10) -5;
     int dy = 2;

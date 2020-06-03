@@ -7,7 +7,7 @@ import greenfoot.*;
  * @author Will Threlkeld 
  * @version 6/1/2020
  */
-public class Counter extends Actor
+public class Counter extends UI
 {
     private static final Color transparent = new Color(0,0,0,0);
     private GreenfootImage background;

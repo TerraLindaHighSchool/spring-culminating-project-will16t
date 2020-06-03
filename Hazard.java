@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Hazard extends Actor
+public class Hazard extends Obstacles
 {
     int dx = Greenfoot.getRandomNumber(4) -2;
     int dy = 1;

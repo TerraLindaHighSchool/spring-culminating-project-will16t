@@ -1,10 +1,9 @@
 import greenfoot.*;
-
 /**
  * Space. Where asteroids and hazards roam.
  * 
  * @author Will Threlkeld
- * @version 6/1/2020
+ * @version 6/2/2020
  */
 public class Space extends World
 {
@@ -24,7 +23,7 @@ public class Space extends World
         scoreCounter = new Counter("Score: ");
         addObject(scoreCounter, 60, 480);
         star();
-        prepare();      
+        prepare();     
     }
     private void star()
     {
@@ -68,7 +67,15 @@ public class Space extends World
         scoreCounter.add(addToScore);
     }
     public void endGame()
-    {
+    { 
+        removeObjects(getObjects(Rocket.class));
+        removeObjects(getObjects(Asteroid.class));
+        removeObjects(getObjects(Hazard.class));
+        removeObjects(getObjects(Counter.class));
+        removeObjects(getObjects(Bullet.class));
+        removeObjects(getObjects(Star.class));
+        Greenfoot.playSound("GameOver.wav");
+        addObject(new GameOverBanner(), 300, 250);
         Greenfoot.stop();
     }
     private void prepare()
